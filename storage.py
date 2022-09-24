@@ -1,5 +1,4 @@
 import logging
-import re
 import sqlite3
 
 FIND_ID_STMT = "SELECT id FROM asuntojen_hinnat WHERE id = :id"
@@ -10,6 +9,7 @@ INSERT INTO asuntojen_hinnat (
 ) VALUES (
     :id, :description, :building_type, :m2, :price, :price_per_m2, :year, :floor, :elevator, :condition, :lot, :energy_class
 )"""
+
 
 def save_to_db(dbfile, sales):
     con = sqlite3.connect(dbfile)
