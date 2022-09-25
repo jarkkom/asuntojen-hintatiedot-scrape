@@ -1,5 +1,4 @@
 import requests
-from pprint import pprint
 from bs4 import BeautifulSoup
 import hashlib
 import logging
