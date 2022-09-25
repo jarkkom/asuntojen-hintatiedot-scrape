@@ -51,8 +51,6 @@ def parse_page(html):
     i = 0
     for first_td in soup.find_all("td", class_="neighborhood"):
         sale = {}
-        print()
-        logging.info(first_td.string)
         sale["district"] = first_td.string
         keys = [
             "description",
@@ -68,13 +66,11 @@ def parse_page(html):
             "energy_class",
         ]
         for td in first_td.find_next_siblings("td"):
-            logging.info("".join(td.stripped_strings))
             key = keys.pop(0)
             sale[key] = "".join(td.stripped_strings)
 
         raw_id = "|".join(sale.values())
         hashed_id = get_id(raw_id)
-        logging.info(f"{raw_id} hashed to {hashed_id}")
         sale["id"] = hashed_id
 
         sales.append(sale)
