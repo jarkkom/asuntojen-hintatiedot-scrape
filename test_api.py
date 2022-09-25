@@ -166,7 +166,6 @@ class TestParsePage(unittest.TestCase):
         (_, actualNextPage) = api.parse_page(html)
         self.assertEqual(3, actualNextPage)
 
-
     @patch("api.logging")
     def test_parse_page_next_page_not_found(self, mock_logging):
         html = "<html><body><table><tbody></tbody></table></body></html>"

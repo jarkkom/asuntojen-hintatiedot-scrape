@@ -43,12 +43,13 @@ def fetch_page(z):
 
 
 def convert_sale(sale):
-    sale['m2'] = float(str.replace(sale['m2'], ',', "."))
-    sale['price'] = float(str.replace(sale['price'], ',', "."))
-    sale['price_per_m2'] = float(str.replace(sale['price_per_m2'], ',', "."))
-    sale['year'] = int(sale['year'])
+    sale["m2"] = float(str.replace(sale["m2"], ",", "."))
+    sale["price"] = float(str.replace(sale["price"], ",", "."))
+    sale["price_per_m2"] = float(str.replace(sale["price_per_m2"], ",", "."))
+    sale["year"] = int(sale["year"])
 
     return sale
+
 
 def parse_page(html):
     soup = BeautifulSoup(html, "html5lib")
