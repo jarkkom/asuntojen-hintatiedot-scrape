@@ -2,7 +2,7 @@ import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
 import hashlib
-import storage
+import logging
 
 
 def get_id(s):
@@ -34,7 +34,17 @@ def fetch_page(z):
 
     api_resp = requests.get("https://asuntojen.hintatiedot.fi/haku/", params=params)
 
-    soup = BeautifulSoup(api_resp.text, "html5lib")
+    if api_resp.status_code == 200:
+        logging.info(f"fetch page {z} succesfully")
+        return api_resp.text
+
+    logging.error(f"error fetching sales: {api_resp.status_code}")
+
+    return None
+
+
+def parse_page(html):
+    soup = BeautifulSoup(html, "html5lib")
 
     sales = []
 
@@ -42,7 +52,7 @@ def fetch_page(z):
     for first_td in soup.find_all("td", class_="neighborhood"):
         sale = {}
         print()
-        pprint(first_td.string)
+        logging.info(first_td.string)
         sale["district"] = first_td.string
         keys = [
             "description",
@@ -58,35 +68,23 @@ def fetch_page(z):
             "energy_class",
         ]
         for td in first_td.find_next_siblings("td"):
-            pprint("".join(td.stripped_strings))
+            logging.info("".join(td.stripped_strings))
             key = keys.pop(0)
             sale[key] = "".join(td.stripped_strings)
 
         raw_id = "|".join(sale.values())
-        print(raw_id, get_id(raw_id))
-        sale["id"] = get_id(raw_id)
+        hashed_id = get_id(raw_id)
+        logging.info(f"{raw_id} hashed to {hashed_id}")
+        sale["id"] = hashed_id
 
         sales.append(sale)
 
         i += 1
 
-    # pprint(i)
-
-    next_z = None
+    next_z = 0
 
     for navigation in soup.find_all("input", attrs={"type": "hidden", "name": "z"}):
         nav_z = int(navigation["value"])
-        if nav_z > z:
-            next_z = nav_z
-            print(f"next z: {nav_z}")
+        next_z = max(next_z, nav_z)
 
     return sales, next_z
-
-
-if __name__ == "__main__":
-    page = 1
-    while page is not None:
-        (sales, page) = fetch_page(page)
-        pprint(sales)
-
-        storage.save_to_db("asuntojen_hinnat.db3", sales)
