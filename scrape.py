@@ -20,7 +20,7 @@ def sync_sales():
 
         storage.save_to_db("asuntojen_hinnat.db3", sales)
 
-        if next_page <= page:
+        if next_page <= page or found > 10000:
             break
 
         page = next_page
