@@ -123,6 +123,57 @@ class TestParsePage(unittest.TestCase):
             (expected_sales, 0),
         )
 
+    @patch("api.logging")
+    def test_parse_page_next_page(self, mock_logging):
+        html = """
+<html><body><table><tbody>
+    <tr>
+        <td class="more">
+            <form action="" method="get">
+            <input type="hidden" name="c" value="Helsinki">
+            <input type="hidden" name="cr" value="1">
+            <input type="hidden" name="t" value="3">
+            <input type="hidden" name="l" value="0">
+            <input type="hidden" name="z" value="1">
+            <input type="hidden" name="search" value="1">
+            <input type="hidden" name="sf" value="0">
+            <input type="hidden" name="so" value="a">
+            <input type="hidden" name="renderType" value="renderTypeTable">
+            <input type="hidden" name="print" value="0">
+            <input type="submit" class="submit" name="submit" value="« edellinen sivu">
+            </form>
+        </td>
+        <td align="center">2</td>
+        <td class="more" align="right">
+            <form action="" method="get">
+            <input type="hidden" name="c" value="Helsinki">
+            <input type="hidden" name="cr" value="1">
+            <input type="hidden" name="t" value="3">
+            <input type="hidden" name="l" value="0">
+            <input type="hidden" name="z" value="3">
+            <input type="hidden" name="search" value="1">
+            <input type="hidden" name="sf" value="0">
+            <input type="hidden" name="so" value="a">
+            <input type="hidden" name="renderType" value="renderTypeTable">
+            <input type="hidden" name="print" value="0">
+            <input type="submit" class="submit" name="submit" value="seuraava sivu »">
+            </form>
+        </td>
+    </tr>
+</tbody></table></body></html>
+"""
+
+        (_, actualNextPage) = api.parse_page(html)
+        self.assertEqual(3, actualNextPage)
+
+
+    @patch("api.logging")
+    def test_parse_page_next_page_not_found(self, mock_logging):
+        html = "<html><body><table><tbody></tbody></table></body></html>"
+
+        (_, actualNextPage) = api.parse_page(html)
+        self.assertEqual(0, actualNextPage)
+
 
 if __name__ == "__main__":
     unittest.main()
