@@ -59,9 +59,9 @@ class TestParsePage(unittest.TestCase):
         <td class="neighborhood">Pasila</td>
         <td class="">3h +k +s</td>
         <td class="houseType">kt</td>
-        <td class="cellAlignRight">64,00</td>
-        <td class="cellAlignRight">450800</td>
-        <td class="cellAlignRight">7044</td>
+        <td class="cellAlignRight">64,75</td>
+        <td class="cellAlignRight">450800,1</td>
+        <td class="cellAlignRight">7044,2</td>
         <td class="cellAlignRight">2012</td>
         <td class="">4/5</td>
         <td class="">on</td>
@@ -72,8 +72,8 @@ class TestParsePage(unittest.TestCase):
         <td class="neighborhood">Länsi-pasila</td>
         <td class="">3h+k+kph+s+vh+t...</td>
         <td class="houseType">kt</td>
-        <td class="cellAlignRight">68,00</td>
-        <td class="cellAlignRight">455000</td>
+        <td class="cellAlignRight">68,12</td>
+        <td class="cellAlignRight">455000,23</td>
         <td class="cellAlignRight">6691</td>
         <td class="cellAlignRight">2012</td>
         <td class="">1/5</td>
@@ -89,31 +89,31 @@ class TestParsePage(unittest.TestCase):
                 "district": "Pasila",
                 "description": "3h +k +s",
                 "building_type": "kt",
-                "m2": "64,00",
-                "price": "450800",
-                "price_per_m2": "7044",
-                "year": "2012",
+                "m2": 64.75,
+                "price": 450800.1,
+                "price_per_m2": 7044.2,
+                "year": 2012,
                 "floor": "4/5",
                 "elevator": "on",
                 "condition": "hyvä",
                 "lot": "oma",
                 "energy_class": "D2013",
-                "id": "dbeb0e4216f60c37b5ec4a68a461ba0b",
+                "id": "953ca2e81f42a8afcab135105408f7a8",
             },
             {
                 "district": "Länsi-pasila",
                 "description": "3h+k+kph+s+vh+t...",
                 "building_type": "kt",
-                "m2": "68,00",
-                "price": "455000",
-                "price_per_m2": "6691",
-                "year": "2012",
+                "m2": 68.12,
+                "price": 455000.23,
+                "price_per_m2": 6691,
+                "year": 2012,
                 "floor": "1/5",
                 "elevator": "on",
                 "condition": "hyvä",
                 "lot": "oma",
                 "energy_class": "D2013",
-                "id": "920aa6a098f7123c73ff5bc369631f4a",
+                "id": "0a8493061855d350d8aba0726ccc07cd",
             },
         ]
 
