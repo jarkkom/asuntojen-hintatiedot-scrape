@@ -5,9 +5,9 @@ FIND_ID_STMT = "SELECT id FROM asuntojen_hinnat WHERE id = :id"
 
 INSERT_STMT = """
 INSERT INTO asuntojen_hinnat (
-    id, district, description, building_type, m2, price, price_per_m2, year, floor, elevator, condition, lot, energy_class
+    id, district, description, building_type, m2, price, price_per_m2, year, floor, elevator, condition, lot, energy_class, added
 ) VALUES (
-    :id, :district, :description, :building_type, :m2, :price, :price_per_m2, :year, :floor, :elevator, :condition, :lot, :energy_class
+    :id, :district, :description, :building_type, :m2, :price, :price_per_m2, :year, :floor, :elevator, :condition, :lot, :energy_class, datetime('now')
 )"""
 
 

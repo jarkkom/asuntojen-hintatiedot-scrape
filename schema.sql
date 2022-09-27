@@ -12,5 +12,6 @@ asuntojen_hinnat (
     elevator TEXT,
     condition TEXT,
     lot TEXT,
-    energy_class TEXT
+    energy_class TEXT,
+    added TEXT
 )
